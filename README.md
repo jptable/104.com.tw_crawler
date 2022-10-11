@@ -7,7 +7,7 @@
 * <h3> 環境建置：
         <h6> python 需下載 "selenium"  
         <h6> 於此處 https://chromedriver.chromium.org/downloads 下載 chromedriver。
-        <h6> 備註：chromedriver 有許多版本。自己的電腦適用哪個版本可以開啟電腦上的 chrome 瀏覽器，右上角「⋮」 > 說明 > 關於 google，裡面有自身適用的版本。可以依據該版本下載適合的 chromedriver 版本。
+        <h6> 備註：chromedriver 有許多版本。自己的電腦適用哪個版本可以開啟電腦上的 chrome 瀏覽器，右上角「⋮」　＞　說明　＞　關於 google，裡面有自身適用的版本。可以依據該版本下載適合的 chromedriver 版本。
     
 * <h3> 使用方法：
         <h6> 將 <grabbing.py> 以 python 編譯器開啟，並執行。
@@ -18,10 +18,15 @@
 * <h3> 已知問題：
         <h6> 該網頁自動下拉17頁之後會出現「手動載入」的按鈕，其 xpath 一處 div[] 每天不同。
         <h6> 如：div[18] -> div[19]
-        > <h6> 找到該區程式碼
-           <h6> ``` python
-                for i in range(19,283,2):
-                    driver.find_element(By.XPATH, "/html/body/main/div[3]/div/div[2]/div[4]/div[%d]/button" % i).click()
-                    time.sleep(3)
-                    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-            ```
+        > <h5> 解決方法
+        <h6> 1. 右鍵點選「手動載入」按鈕　＞　檢查　＞　複製該行的完整 xpath。
+        <h6> 2. 找到該區程式碼
+ 
+        for i in range(19, 283, 2):
+            driver.find_element(By.XPATH, "/html/body/main/div[3]/div/div[2]/div[4]/div[%d]/button" % i).click()
+            time.sleep(3)
+            driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+                
+        <h6> 3. 在空白處貼上複製的 xpath
+        <h6> 4. 找到上述 /html/body/main/div[3]/div/div[2]/div[4]/div[%d]/button，應該只有 div[%d] 與不同
+        <h6> 5. 將不同的那一個數字填入 for i in range(19, 283, 2) 中的 "19" 的位置。
